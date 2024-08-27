@@ -1,0 +1,99 @@
+{
+  "name": "dentest",
+  "displayName": "Dentest",
+  "description": "Dentest is a behavior-driven development platform that makes your Gherkin features live online so that they can be created and read by non-developers. This plugin allows developers using VSCode to pull them in their projects",
+  "version": "0.1.0",
+  "publisher": "Dentest",
+  "icon": "resources/logo.png",
+  "keywords": ["BDD", "Dentest", "Behavior", "Test"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dentest-project/vscode-extension.git"
+  },
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Testing"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "dentest.configuration",
+        "title": "Dentest: Configuration"
+      },
+      {
+        "command": "dentest.pull",
+        "title": "Dentest: Pull"
+      },
+      {
+        "command": "dentest.clear",
+        "title": "Dentest: Clear configuration"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Dentest Configuration",
+      "properties": {
+        "dentest.config": {
+          "type": "object",
+          "default": {
+            "api": "https://api.dentest.tech",
+            "pullToken": "",
+            "featuresDestination": "",
+            "inlineParamWrapper": "\""
+          },
+          "properties": {
+            "api": {
+              "type": "string",
+              "description": "API endpoint URL."
+            },
+            "pullToken": {
+              "type": "string",
+              "description": "Token used for pulling data from the API."
+            },
+            "featuresDestination": {
+              "type": "string",
+              "description": "Directory path for saving features."
+            },
+            "inlineParamWrapper": {
+              "type": "string",
+              "description": "String used for wrapping inline parameters."
+            }
+          }
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "featuresTreeView",
+          "name": "Features"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.92.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0"
+  }
+}
